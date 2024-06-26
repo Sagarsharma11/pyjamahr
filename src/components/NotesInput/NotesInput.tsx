@@ -6,7 +6,7 @@ import { BiSolidPaint } from "react-icons/bi";
 import { CiImageOn } from "react-icons/ci";
 
 import { useDispatch } from "react-redux";
-import { addNote } from "../../Utils/Redux/features/counter/counterSlice/counterSlice"; // Correctly import addNote
+import { addNote } from "../../Utils/Redux/features/counter/counterSlice/notesSlice"; // Correctly import addNote
 
 import { PiBellSimpleZ } from "react-icons/pi";
 import { IoMdPersonAdd } from "react-icons/io";

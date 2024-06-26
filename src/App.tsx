@@ -7,7 +7,7 @@ import type { RootState } from "./Utils/Redux/Store";
 import { useSelector } from "react-redux";
 
 function App() {
-  const notes = useSelector((state: RootState) => state.counter);
+  const notes = useSelector((state: RootState) => state.notes);
 
   console.log(notes)
 
@@ -32,7 +32,7 @@ function App() {
           <div className="unpinned--container">
           {
               notes.notes.length ? 
-              notes.notes.filter((item)=>item.isPinned==false)
+              notes.notes.filter((item)=>item.isPinned===false)
                 .map((ele, key) => (
                   <div key={key}>
                     <Notes data={ele} />

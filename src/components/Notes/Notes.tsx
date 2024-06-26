@@ -9,7 +9,7 @@ import { MdPhoto } from "react-icons/md";
 import { ImFolderDownload } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { UseDispatch, useDispatch } from "react-redux";
-import { pinnedNote } from "../../Utils/Redux/features/counter/counterSlice/counterSlice";
+import { pinnedNote } from "../../Utils/Redux/features/counter/counterSlice/notesSlice";
 
 type Props = {
   id: string;
