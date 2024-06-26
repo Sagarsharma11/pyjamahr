@@ -5,7 +5,8 @@ interface Note {
   id: string;
   content: string;
   image?: string | undefined;
-  isPinned: boolean
+  isPinned: boolean;
+  title: string;
 }
 
 interface CounterState {
@@ -24,17 +25,24 @@ export const counterSlice = createSlice({
       reducer: (state, action: PayloadAction<Note>) => {
         state.notes.push(action.payload);
       },
-      prepare: ({content, image, isPinned}:Note) => ({
+      prepare: ({content, image, isPinned, title}:Note) => ({
         payload: {
           id: nanoid(),
           content,
           image,
-          isPinned
+          isPinned,
+          title
         },
       }),
     },
+    pinnedNote: (state, action: PayloadAction<string>) => {
+      const note = state.notes.find(note => note.id === action.payload);
+      if (note) {
+        note.isPinned = true;
+      }
+    }
   },
 });
 
-export const { addNote } = counterSlice.actions;
+export const { addNote, pinnedNote } = counterSlice.actions;
 export default counterSlice.reducer;

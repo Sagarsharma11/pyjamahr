@@ -47,6 +47,7 @@
   left: 0rem;
   display: none;
   transition: 1s ease-in-out;
+  cursor: pointer;
 }
 
 .Notes--container .show {
@@ -78,6 +79,7 @@
 .tick--icon,
 .pin--icon {
   position: absolute;
+  cursor: pointer;
 }
 
 .pin--icon {

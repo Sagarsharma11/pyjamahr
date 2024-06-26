@@ -8,6 +8,8 @@ import { IoColorPalette } from "react-icons/io5";
 import { MdPhoto } from "react-icons/md";
 import { ImFolderDownload } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { UseDispatch, useDispatch } from "react-redux";
+import { pinnedNote } from "../../Utils/Redux/features/counter/counterSlice/counterSlice";
 
 type Props = {
   id: string;
@@ -18,13 +20,21 @@ type Props = {
 
 const Notes = ({ data }: any) => {
   const [display, setDisplay] = useState(false);
-  const color = "#D3D3D3";
+  const [pinned, setPinned] = useState(false)
+  const dispatch = useDispatch()
+  const color = "#B2BEB5";
   const handleMouseEnter = () => {
     setDisplay(true);
   };
   const handleMouseLeave = () => {
     setDisplay(false);
   };
+
+  const pinnedNotes = (ele:any)=>{
+    console.log(ele)
+    setPinned(!pinned)
+    dispatch(pinnedNote(ele.id))
+  }
 
   return (
     <div
@@ -35,8 +45,8 @@ const Notes = ({ data }: any) => {
       <div className={`tick--icon ${display ? "show" : ""}`}>
         <FaCheckCircle size={18} color="#fff" />
       </div>
-      <div className={`pin--icon ${display ? "show" : ""}`}>
-        <TbPinnedFilled size={24} color={color} />
+      <div onClick={()=>pinnedNotes(data)} className={`pin--icon ${display ? "show" : ""}`}>
+        <TbPinnedFilled size={24} color={data.isPinned?"#fff":color} />
       </div>
       {data.image ? (
         <div className="image-preview">
@@ -45,6 +55,7 @@ const Notes = ({ data }: any) => {
       ) : (
         ""
       )}
+      <h4>{data.title}</h4>
       {data.content}
       <div className={`down-dash ${display ? "show" : ""}`}>
         <div>

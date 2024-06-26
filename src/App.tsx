@@ -17,15 +17,30 @@ function App() {
       <div className="left--side">
         <NotesInput />
         <div className="Notes--main--container">
+
+          <div className="pinned--container">
+            {
+              notes.notes.length ? notes.notes.filter((ele)=>ele.isPinned ===true)
+                .map((ele, key) => (
+                  <div key={key}>
+                    <Notes data={ele} />
+                  </div>
+                ))
+                : ""
+            }
+          </div>
+          <div className="unpinned--container">
           {
-          notes.notes.length ? notes.notes
-          .map((ele, key) => (
-            <div key={key}>
-              <Notes data={ele} />
-            </div>
-          ))
-          :""
-          }
+              notes.notes.length ? 
+              notes.notes.filter((item)=>item.isPinned==false)
+                .map((ele, key) => (
+                  <div key={key}>
+                    <Notes data={ele} />
+                  </div>
+                ))
+                : ""
+            }
+          </div>
         </div>
       </div>
     </div>
