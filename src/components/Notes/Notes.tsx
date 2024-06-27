@@ -44,19 +44,19 @@ const Notes = ({ data }: any) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
     console.log(e.target.name);
     console.log('id ', id)
-    // if (e.target.name === "backgroundColor") {
-    //   dispatch(updateColor({ id, color: e.target.value }));
-    // } else if (e.target.name === "imageUpload") {
-    //   const file = e.target.files?.[0];
-    //   if (file) {
-    //     const reader = new FileReader();
-    //     reader.onloadend = () => {
-    //       let image = reader.result as string;
-    //       dispatch(updateImage({ id, image }));
-    //     };
-    //     reader.readAsDataURL(file);
-    //   }
-    // }
+    if (e.target.name === "backgroundColor") {
+      dispatch(updateColor({ id, color: e.target.value }));
+    } else if (e.target.name === "imageUpload") {
+      const file = e.target.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          let image = reader.result as string;
+          dispatch(updateImage({ id, image }));
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   };
 
   return (
@@ -99,9 +99,9 @@ const Notes = ({ data }: any) => {
             required={true}
             name={"backgroundColor"}
             className="input-action"
-            id={"bgColor"}
+            id={`bgColor-${data.id}`}
           />
-          <label htmlFor="bgColor">
+          <label htmlFor={`bgColor-${data.id}`}>
             <IoColorPalette size={18} color={color} />
           </label>
         </div>
@@ -110,11 +110,11 @@ const Notes = ({ data }: any) => {
             type="file"
             accept="image/*"
             onChange={(e) => handleChange(e, data.id)}
-            id="imageUpload"
+            id={`imageUpload-${data.id}`}
             name={"imageUpload"}
             className="input-action"
           />
-          <label htmlFor="imageUpload">
+          <label htmlFor={`imageUpload-${data.id}`}>
             <RiFolderImageFill size={18} color={color} />
           </label>
         </div>
