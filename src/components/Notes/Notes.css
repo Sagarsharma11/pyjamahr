@@ -16,7 +16,14 @@
   display: flex;
   justify-content: center;
 }
-
+.Notes--container
+.icon-container{
+  cursor: pointer;
+}
+.Notes--container
+label{
+  cursor: pointer;
+}
 .Notes--container .image-preview img {
   height: 150px;
   width: 100%;
@@ -58,6 +65,15 @@
 .Notes--container:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.Notes--container .input-action {
+  width: 1px;
+  display: none;
+  /* position: absolute;
+  top: 15%;
+  left: 45%;
+  opacity: 0; */
+  border: 1px solid red;
+}
 
 .tick--icon,
 .pin--icon,
@@ -85,4 +101,35 @@
 .pin--icon {
   top: auto;
   right: auto;
+}
+
+
+@media screen and (max-width: 480px) {
+  .take-a-note {
+    width: 10rem;
+  }
+  .input--container {
+    padding: 0 1rem;
+    width: 100%;
+  }
+  .NotesInput--main .container-2 input {
+    width: 14rem;
+    padding: 0;
+  }
+  .notes-left-side {
+    padding: 0rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  input {
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .NotesInput--main .Notes-down-dash {
+    padding: 0 0rem 1rem 0rem;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
 }

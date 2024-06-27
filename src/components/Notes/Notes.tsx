@@ -5,48 +5,75 @@ import { TbPinnedFilled } from "react-icons/tb";
 import { PiBellSimpleZ } from "react-icons/pi";
 import { IoMdPersonAdd } from "react-icons/io";
 import { IoColorPalette } from "react-icons/io5";
-import { MdPhoto } from "react-icons/md";
-import { ImFolderDownload } from "react-icons/im";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { UseDispatch, useDispatch } from "react-redux";
-import { pinnedNote } from "../../Utils/Redux/features/counter/counterSlice/notesSlice";
+import { useDispatch } from "react-redux";
+import { RiFolderImageFill } from "react-icons/ri";
+import {
+  deleteNote,
+  pinnedNote,
+  updateColor,
+  updateImage,
+} from "../../Utils/Redux/features/counter/counterSlice/notesSlice";
+import { MdDelete } from "react-icons/md";
 
-type Props = {
-  id: string;
-  content: string;
-  image?: string;
-  isPinned: boolean;
-};
+// type Props = {
+//   id: string;
+//   content: string;
+//   image?: string;
+//   isPinned: boolean;
+//   backgroundColor: string;
+// };
 
 const Notes = ({ data }: any) => {
-  const [display, setDisplay] = useState(false);
-  const [pinned, setPinned] = useState(false)
-  const dispatch = useDispatch()
+  const [display, setDisplay] = useState(true);
+  const [pinned, setPinned] = useState(false);
+  const dispatch = useDispatch();
   const color = "#B2BEB5";
   const handleMouseEnter = () => {
-    setDisplay(true);
+    // setDisplay(true);
   };
   const handleMouseLeave = () => {
-    setDisplay(false);
+    // setDisplay(false);
   };
 
-  const pinnedNotes = (ele:any)=>{
-    console.log(ele)
-    setPinned(!pinned)
-    dispatch(pinnedNote(ele.id))
-  }
+  const pinnedNotes = (ele: any) => {
+    setPinned(!pinned);
+    dispatch(pinnedNote(ele.id));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    console.log(e.target.name);
+    console.log('id ', id)
+    // if (e.target.name === "backgroundColor") {
+    //   dispatch(updateColor({ id, color: e.target.value }));
+    // } else if (e.target.name === "imageUpload") {
+    //   const file = e.target.files?.[0];
+    //   if (file) {
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //       let image = reader.result as string;
+    //       dispatch(updateImage({ id, image }));
+    //     };
+    //     reader.readAsDataURL(file);
+    //   }
+    // }
+  };
 
   return (
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="Notes--container"
+      style={{ backgroundColor: data.backgroundColor }}
     >
       <div className={`tick--icon ${display ? "show" : ""}`}>
         <FaCheckCircle size={18} color="#fff" />
       </div>
-      <div onClick={()=>pinnedNotes(data)} className={`pin--icon ${display ? "show" : ""}`}>
-        <TbPinnedFilled size={24} color={data.isPinned?"#fff":color} />
+      <div
+        onClick={() => pinnedNotes(data)}
+        className={`pin--icon ${display ? "show" : ""}`}
+      >
+        <TbPinnedFilled size={24} color={data.isPinned ? "#fff" : color} />
       </div>
       {data.image ? (
         <div className="image-preview">
@@ -55,6 +82,7 @@ const Notes = ({ data }: any) => {
       ) : (
         ""
       )}
+      <small>{data.id}</small>
       <h4>{data.title}</h4>
       {data.content}
       <div className={`down-dash ${display ? "show" : ""}`}>
@@ -64,14 +92,34 @@ const Notes = ({ data }: any) => {
         <div>
           <IoMdPersonAdd size={22} color={color} />
         </div>
-        <div>
-          <IoColorPalette size={22} color={color} />
+        <div className="icon-container">
+          <input
+            onChange={(e) => handleChange(e, data.id)}
+            type="color"
+            required={true}
+            name={"backgroundColor"}
+            className="input-action"
+            id={"bgColor"}
+          />
+          <label htmlFor="bgColor">
+            <IoColorPalette size={18} color={color} />
+          </label>
         </div>
-        <div>
-          <MdPhoto size={22} color={color} />
+        <div className="icon-container">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleChange(e, data.id)}
+            id="imageUpload"
+            name={"imageUpload"}
+            className="input-action"
+          />
+          <label htmlFor="imageUpload">
+            <RiFolderImageFill size={18} color={color} />
+          </label>
         </div>
-        <div>
-          <ImFolderDownload size={22} color={color} />
+        <div onClick={() => dispatch(deleteNote(data.id))}>
+          <MdDelete size={22} color={color} />
         </div>
         <div>
           <BsThreeDotsVertical size={22} color={color} />
