@@ -36,8 +36,13 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
   border-radius: 0.2rem;
+}
+.NotesInput--main .container-1 
+.inner-container{
+  display: flex;
+  gap: 1rem;
 }
 
 .NotesInput--main .container-2 {

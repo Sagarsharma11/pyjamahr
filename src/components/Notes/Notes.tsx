@@ -16,24 +16,16 @@ import {
 } from "../../Utils/Redux/features/counter/counterSlice/notesSlice";
 import { MdDelete } from "react-icons/md";
 
-// type Props = {
-//   id: string;
-//   content: string;
-//   image?: string;
-//   isPinned: boolean;
-//   backgroundColor: string;
-// };
-
 const Notes = ({ data }: any) => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
   const [pinned, setPinned] = useState(false);
   const dispatch = useDispatch();
   const color = "#B2BEB5";
   const handleMouseEnter = () => {
-    // setDisplay(true);
+    setDisplay(true);
   };
   const handleMouseLeave = () => {
-    // setDisplay(false);
+    setDisplay(false);
   };
 
   const pinnedNotes = (ele: any) => {

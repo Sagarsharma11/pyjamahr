@@ -16,9 +16,7 @@
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   margin-top: 2rem;
   color: #a7fd39;
 }
@@ -66,14 +64,6 @@
     animation-play-state: running;
   }
   .menuClose {
-    /* animation-name: openMenu;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-    animation-play-state: running; */
     animation-name: closeMenu;
     animation-duration: 0.5s;
     animation-timing-function: ease;
@@ -84,9 +74,6 @@
     animation-play-state: running;
   }
 
-.navbar-items ul{
-
-}
 .navbar-items ul li{
     cursor: pointer;
 }

@@ -4,7 +4,6 @@ import { CiSquareCheck } from "react-icons/ci";
 import { BiSolidPaint } from "react-icons/bi";
 import { CiImageOn } from "react-icons/ci";
 import { useDispatch } from "react-redux";
-import { addNote } from "../../Utils/Redux/features/counter/counterSlice/notesSlice"; // Correctly import addNote
 import { PiBellSimpleZ } from "react-icons/pi";
 import { IoMdPersonAdd } from "react-icons/io";
 import { IoColorPalette } from "react-icons/io5";
@@ -14,6 +13,8 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { TfiBackRight } from "react-icons/tfi";
 import { TbPinnedFilled } from "react-icons/tb";
 import { RiFolderImageFill } from "react-icons/ri";
+import { addNote } from "../../Utils/Redux/features/counter/counterSlice/notesSlice"; // Correctly import addNote
+
 type Props = {};
 
 type obj = {
@@ -38,7 +39,9 @@ const NotesInput = (props: Props) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setValue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setContent(e.target.value);
   };
@@ -54,6 +57,7 @@ const NotesInput = (props: Props) => {
         content: "",
         image: "",
         title: "",
+        backgroundColor:"",
         isPinned: false,
       }));
       setImage(null);
@@ -73,17 +77,12 @@ const NotesInput = (props: Props) => {
     }
   };
 
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  //   const { value } = event.target;
-  //   setContent(value);
-  // };
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [content]);
@@ -95,14 +94,16 @@ const NotesInput = (props: Props) => {
         {show === false ? (
           <div onClick={() => setShow(!show)} className="container-1">
             <div className="take-a-note">Take a note..</div>
-            <div onClick={handleSubmit}>
-              <CiSquareCheck size={18} color={"#dcdde1"} />
-            </div>
-            <div>
-              <BiSolidPaint size={18} color="#dcdde1" />
-            </div>
-            <div>
-              <CiImageOn size={18} color="#dcdde1" />
+            <div className="inner-container">
+              <div onClick={handleSubmit}>
+                <CiSquareCheck size={18} color={"#dcdde1"} />
+              </div>
+              <div>
+                <BiSolidPaint size={18} color="#dcdde1" />
+              </div>
+              <div>
+                <CiImageOn size={18} color="#dcdde1" />
+              </div>
             </div>
           </div>
         ) : (
@@ -137,9 +138,7 @@ const NotesInput = (props: Props) => {
               required={true}
               name={"content"}
               className="input-field"
-            >
-
-            </textarea>
+            ></textarea>
             <div className={`Notes-down-dash ${true ? "show" : ""}`}>
               <div className={"notes-left-side"}>
                 <div>
@@ -158,7 +157,7 @@ const NotesInput = (props: Props) => {
                     className="input-action"
                   />
                   <label htmlFor="bgColor">
-                    <IoColorPalette size={18} color={color} />
+                    <IoColorPalette size={18} color={value.backgroundColor?value.backgroundColor:color} />
                   </label>
                 </div>
                 <div>
