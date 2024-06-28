@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./NotesInput.css";
 import { CiSquareCheck } from "react-icons/ci";
 import { BiSolidPaint } from "react-icons/bi";
@@ -38,8 +38,9 @@ const NotesInput = (props: Props) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setContent(e.target.value);
   };
 
   const handleSubmit = () => {
@@ -71,6 +72,22 @@ const NotesInput = (props: Props) => {
       reader.readAsDataURL(file);
     }
   };
+
+  const [content, setContent] = useState<string>('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  //   const { value } = event.target;
+  //   setContent(value);
+  // };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [content]);
+
   const color = "#B2BEB5";
   return (
     <div className="NotesInput--main">
@@ -111,15 +128,18 @@ const NotesInput = (props: Props) => {
                 />
               </div>
             </div>
-            <input
+            <textarea
               onChange={handleChange}
               placeholder="Take a note..."
-              type="text"
+              // type="text"
+              ref={textareaRef}
               value={value.content}
               required={true}
               name={"content"}
               className="input-field"
-            />
+            >
+
+            </textarea>
             <div className={`Notes-down-dash ${true ? "show" : ""}`}>
               <div className={"notes-left-side"}>
                 <div>

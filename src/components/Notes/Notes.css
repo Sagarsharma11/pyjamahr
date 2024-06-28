@@ -10,6 +10,11 @@
   color: #fff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: relative;
+  /* word handle */
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  word-break: break-word; 
+  white-space: pre-wrap; 
 }
 
 .Notes--container .image-preview {
@@ -43,6 +48,7 @@ label{
   top: 1rem;
   display: none;
   transition: 1s ease-in-out;
+  z-index: 9999;
 }
 
 .Notes--container .down-dash {
@@ -130,6 +136,29 @@ label{
   }
 }
 @media screen and (min-width: 481px) and (max-width: 768px) {
+  .take-a-note {
+    width: 10rem;
+  }
+  .input--container {
+    padding: 0 1rem;
+    width: 100%;
+  }
+  .NotesInput--main .container-2 input {
+    width: 14rem;
+    padding: 0;
+  }
+  .notes-left-side {
+    padding: 0rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  input {
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .NotesInput--main .Notes-down-dash {
+    padding: 0 0rem 1rem 0rem;
+  }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
 }

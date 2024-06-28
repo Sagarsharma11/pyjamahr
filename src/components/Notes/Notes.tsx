@@ -82,9 +82,9 @@ const Notes = ({ data }: any) => {
       ) : (
         ""
       )}
-      <small>{data.id}</small>
+      {/* <small>{data.id}</small> */}
       <h4>{data.title}</h4>
-      {data.content}
+  <p>    {data.content}</p>
       <div className={`down-dash ${display ? "show" : ""}`}>
         <div>
           <PiBellSimpleZ size={22} color={color} />
